@@ -108,6 +108,7 @@ public class Game {
 
 	public static void update() {
 		cleanEnemies();
+		cleanBullets();
 		
 		for (Turret t : turrets) {
 			t.update();
@@ -124,6 +125,17 @@ public class Game {
 		Iterator<Enemy> iter = enemies.iterator();
 		while(iter.hasNext()) {
 			if(iter.next().isDead()) {
+				iter.remove();
+			}
+		}
+	}
+	
+	public static void cleanBullets() {
+		Iterator<Bullet> iter = bullets.iterator();
+		Bullet b = null;
+		while(iter.hasNext()) {
+			b = iter.next();
+			if(b.getX() < 0 || b.getX() > GamePanel.WIDTH || b.getY() < 0 || b.getY() > GUI.SCREEN_HEIGHT) {
 				iter.remove();
 			}
 		}

@@ -17,9 +17,10 @@ import javax.swing.Timer;
 public class GamePanel extends JPanel implements ActionListener {
 
 	private Tile hoveredTile;
+	public static final int WIDTH = GUI.SCREEN_WIDTH - ControlsPanel.WIDTH;
 
 	public GamePanel() {
-		setPreferredSize(new Dimension(600, GUI.SCREEN_HEIGHT));
+		setPreferredSize(new Dimension(WIDTH, GUI.SCREEN_HEIGHT));
 		setBackground(Color.RED);
 
 		addMouseListener(new GameMouseListener());

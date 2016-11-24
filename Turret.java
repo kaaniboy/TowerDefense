@@ -65,7 +65,6 @@ public class Turret extends Entity {
 		double yVelocity = -1 * Math.sin(Math.toRadians(rotation));
 
 		if (currentTick == ticksBetweenShots) {
-			System.out.println("Created bullet with " + xVelocity + ", " + yVelocity);
 			Bullet bullet = new Bullet(x + Game.TILE_SIZE / 2, y + Game.TILE_SIZE / 2, xVelocity, yVelocity);
 			Game.bullets.add(bullet);
 

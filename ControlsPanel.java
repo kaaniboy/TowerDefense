@@ -9,8 +9,10 @@ import javax.swing.JPanel;
 
 public class ControlsPanel extends JPanel implements ActionListener {
 	JLabel moneyLabel;
+	public static final int WIDTH = 200;
+	
 	public ControlsPanel() {
-		setPreferredSize(new Dimension(200, GUI.SCREEN_HEIGHT));
+		setPreferredSize(new Dimension(WIDTH, GUI.SCREEN_HEIGHT));
 		
 		moneyLabel = new JLabel("Money: 100");
 		add(moneyLabel);
