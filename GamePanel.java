@@ -17,6 +17,7 @@ import javax.swing.Timer;
 public class GamePanel extends JPanel implements ActionListener {
 
 	private Tile hoveredTile;
+	private Turret selectedTurret;
 	public static final int WIDTH = GUI.SCREEN_WIDTH - ControlsPanel.WIDTH;
 
 	public GamePanel() {
@@ -54,6 +55,10 @@ public class GamePanel extends JPanel implements ActionListener {
 		}
 	}
 
+	public Turret getSelectedTurret() {
+		return selectedTurret;
+	}
+
 	private class GameMouseListener extends MouseAdapter {
 
 		@Override
@@ -83,6 +88,22 @@ public class GamePanel extends JPanel implements ActionListener {
 				Turret turret = new Turret(hoveredTile.getX(), hoveredTile.getY());
 				hoveredTile.setChild(turret);
 				Game.addTurret(turret);
+				
+				if(selectedTurret != null) {
+					selectedTurret.setSelected(false);
+				}
+				
+				selectedTurret = turret;
+				selectedTurret.setSelected(true);
+			}
+
+			if (hoveredTile.getChild() != null) {
+				selectedTurret.setSelected(false);
+				selectedTurret = (Turret) hoveredTile.getChild();
+				selectedTurret.setSelected(true);
+			} else {
+				selectedTurret.setSelected(false);
+				selectedTurret = null;
 			}
 		}
 	}

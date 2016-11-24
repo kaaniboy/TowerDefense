@@ -12,14 +12,18 @@ public class Turret extends Entity {
 
 	private int ticksBetweenShots;
 	private int currentTick = 0;
+	private int bulletPower;
+
+	private boolean selected = false;
 
 	public Turret(int x, int y) {
 		super(x, y);
+
 		color = Color.RED;
 		rotation = (int) (Game.random.nextDouble() * 360);
 		armLength = 12;
 		health = 100;
-
+		bulletPower = 10;
 		ticksBetweenShots = 50;
 	}
 
@@ -27,7 +31,12 @@ public class Turret extends Entity {
 	public void paint(Graphics g) {
 		Graphics2D g2 = (Graphics2D) g;
 
-		g2.setColor(color);
+		if (isSelected()) {
+			g2.setColor(Color.BLUE);
+		} else {
+			g2.setColor(color);
+		}
+
 		g2.fillOval(x + 2, y + 2, Game.TILE_SIZE - 4, Game.TILE_SIZE - 4);
 
 		int centerX = x + Game.TILE_SIZE / 2;
@@ -53,25 +62,44 @@ public class Turret extends Entity {
 
 	@Override
 	public void update() {
-		Enemy firstEnemy = Game.enemies.get(0);
-		rotation = (int) Math
-				.toDegrees(Math.atan2(Game.toCartesianY(firstEnemy.y) - Game.toCartesianY(y), firstEnemy.x - x));
-		
-		if (rotation < 0) {
-			rotation = 360 - Math.abs(rotation);
+		if (!Game.enemies.isEmpty()) {
+			Enemy firstEnemy = Game.enemies.get(0);
+			rotation = (int) Math
+					.toDegrees(Math.atan2(Game.toCartesianY(firstEnemy.y) - Game.toCartesianY(y), firstEnemy.x - x));
+
+			if (rotation < 0) {
+				rotation = 360 - Math.abs(rotation);
+			}
+
+			double xVelocity = Math.cos(Math.toRadians(rotation));
+			double yVelocity = -1 * Math.sin(Math.toRadians(rotation));
+
+			if (currentTick == ticksBetweenShots) {
+				Bullet bullet = new Bullet(x + Game.TILE_SIZE / 2, y + Game.TILE_SIZE / 2, xVelocity, yVelocity);
+				bullet.setDamage(bulletPower);
+				Game.bullets.add(bullet);
+
+				currentTick = 0;
+			} else {
+				currentTick++;
+			}
+
 		}
-		
-		double xVelocity = Math.cos(Math.toRadians(rotation));
-		double yVelocity = -1 * Math.sin(Math.toRadians(rotation));
+	}
 
-		if (currentTick == ticksBetweenShots) {
-			Bullet bullet = new Bullet(x + Game.TILE_SIZE / 2, y + Game.TILE_SIZE / 2, xVelocity, yVelocity);
-			Game.bullets.add(bullet);
+	public int getDamage() {
+		return bulletPower;
+	}
+	
+	public void setDamage(int bulletPower) {
+		this.bulletPower = bulletPower;
+	}
 
-			currentTick = 0;
-		} else {
-			currentTick++;
-		}
-
+	public boolean isSelected() {
+		return selected;
+	}
+	
+	public void setSelected(boolean selected) {
+		this.selected = selected;
 	}
 }

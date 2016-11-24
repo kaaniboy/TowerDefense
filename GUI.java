@@ -19,6 +19,7 @@ public class GUI extends JFrame {
 		
 		ControlsPanel controlsPanel = new ControlsPanel();
 		GamePanel gamePanel = new GamePanel();
+		controlsPanel.setGamePanel(gamePanel);
 		
 		Container cont = getContentPane();
 		cont.setLayout(new BorderLayout());

@@ -7,11 +7,14 @@ public class Bullet extends Entity {
 	private double xVelocity;
 	private double yVelocity;
 	private int speedMultiplier;
+	private boolean hasCollided;
 
 	public Bullet(int x, int y, double xVelocity, double yVelocity) {
 		super(x, y);
 		damage = 10;
 		speedMultiplier = 10;
+		hasCollided = false;
+		
 		this.xVelocity = speedMultiplier * xVelocity;
 		this.yVelocity = speedMultiplier * yVelocity;
 	}
@@ -22,11 +25,19 @@ public class Bullet extends Entity {
 		y += yVelocity;
 		
 		for(Enemy e: Game.enemies) {
-			if(Math.sqrt(Math.pow(y - e.getCenterY(), 2) + Math.pow(x - e.getCenterX(), 2)) < 10) {
-				System.out.println("HIT!");
+			if(Math.sqrt(Math.pow(y - e.getCenterY(), 2) + Math.pow(x - e.getCenterX(), 2)) < Game.TILE_SIZE - 4) {
 				e.setHealth(e.getHealth() - damage);
+				hasCollided = true;
 			}
 		}
+	}
+	
+	public boolean hasCollided() {
+		return hasCollided;
+	}
+	
+	public void setDamage(int damage) {
+		this.damage = damage;
 	}
 
 	@Override

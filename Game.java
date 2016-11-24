@@ -137,6 +137,8 @@ public class Game {
 			b = iter.next();
 			if(b.getX() < 0 || b.getX() > GamePanel.WIDTH || b.getY() < 0 || b.getY() > GUI.SCREEN_HEIGHT) {
 				iter.remove();
+			} else if(b.hasCollided()) {
+				iter.remove();
 			}
 		}
 	}
