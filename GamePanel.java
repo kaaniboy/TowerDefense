@@ -14,7 +14,7 @@ import java.awt.event.MouseMotionListener;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
-public class GamePanel extends JPanel {
+public class GamePanel extends JPanel implements ActionListener {
 
 	private Tile hoveredTile;
 
@@ -24,8 +24,6 @@ public class GamePanel extends JPanel {
 
 		addMouseListener(new GameMouseListener());
 		addMouseMotionListener(new GameMouseListener());
-
-		Game.timer.addActionListener(new GameTickListener());
 	}
 
 	@Override
@@ -50,13 +48,8 @@ public class GamePanel extends JPanel {
 		for(Enemy e: Game.enemies) {
 			e.paint(g2);
 		}
-	}
-
-	private class GameTickListener implements ActionListener {
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			repaint();
-			Game.update();
+		for(Bullet b: Game.bullets) {
+			b.paint(g2);
 		}
 	}
 
@@ -91,5 +84,11 @@ public class GamePanel extends JPanel {
 				Game.addTurret(turret);
 			}
 		}
+	}
+	
+	@Override
+	public void actionPerformed(ActionEvent event) {
+		repaint();
+		Game.update();
 	}
 }

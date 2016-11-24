@@ -1,3 +1,4 @@
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -21,6 +22,12 @@ public class Enemy extends Entity {
 
 		int centerX = x + Game.TILE_SIZE / 2;
 		int centerY = y + Game.TILE_SIZE / 2;
+		
+		g2.setColor(Color.GREEN);
+		g2.fillRect(x, y - 10, Game.TILE_SIZE, 7);
+		g2.setColor(Color.BLACK);
+		g2.setStroke(new BasicStroke(1.1F));
+		g2.drawRect(x, y - 10, Game.TILE_SIZE, 7);
 	}
 
 	@Override
