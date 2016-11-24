@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
@@ -106,6 +107,8 @@ public class Game {
 	}
 
 	public static void update() {
+		cleanEnemies();
+		
 		for (Turret t : turrets) {
 			t.update();
 		}
@@ -114,6 +117,15 @@ public class Game {
 		}
 		for (Bullet b : bullets) {
 			b.update();
+		}
+	}
+	
+	public static void cleanEnemies() {
+		Iterator<Enemy> iter = enemies.iterator();
+		while(iter.hasNext()) {
+			if(iter.next().isDead()) {
+				iter.remove();
+			}
 		}
 	}
 

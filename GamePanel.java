@@ -44,11 +44,11 @@ public class GamePanel extends JPanel implements ActionListener {
 			g.drawLine(0, i * Game.TILE_SIZE, 600, i * Game.TILE_SIZE);
 			g.drawLine(i * Game.TILE_SIZE, 0, i * Game.TILE_SIZE, 600);
 		}
-		
-		for(Enemy e: Game.enemies) {
+
+		for (Enemy e : Game.enemies) {
 			e.paint(g2);
 		}
-		for(Bullet b: Game.bullets) {
+		for (Bullet b : Game.bullets) {
 			b.paint(g2);
 		}
 	}
@@ -65,27 +65,27 @@ public class GamePanel extends JPanel implements ActionListener {
 		public void mouseMoved(MouseEvent e) {
 			int tileX = e.getX() / Game.TILE_SIZE;
 			int tileY = e.getY() / Game.TILE_SIZE;
-			
-			if(hoveredTile != null) {
+
+			if (hoveredTile != null) {
 				hoveredTile.setHovered(false);
 			}
-			
+
 			hoveredTile = Game.map[tileX][tileY];
 			hoveredTile.setHovered(true);
 		}
-		
+
 		@Override
 		public void mouseClicked(MouseEvent e) {
-			if(Game.money >= Turret.COST) {
+			if (hoveredTile.isFillable() && hoveredTile.getChild() == null && Game.money >= Turret.COST) {
 				Game.money -= Turret.COST;
-				
+
 				Turret turret = new Turret(hoveredTile.getX(), hoveredTile.getY());
 				hoveredTile.setChild(turret);
 				Game.addTurret(turret);
 			}
 		}
 	}
-	
+
 	@Override
 	public void actionPerformed(ActionEvent event) {
 		repaint();

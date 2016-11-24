@@ -62,5 +62,4 @@ public class Tile extends Entity {
 	public boolean isFillable() {
 		return fillable;
 	}
-
 }
