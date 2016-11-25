@@ -7,7 +7,7 @@ import javax.swing.Timer;
 
 
 public class GUI extends JFrame {
-	public static int SCREEN_WIDTH = 800;
+	public static int SCREEN_WIDTH = 820;
 	public static int SCREEN_HEIGHT = 600;
 	private static int MILLISECONDS_PER_TICK = 50;
 	public static Timer timer;

@@ -82,26 +82,29 @@ public class GamePanel extends JPanel implements ActionListener {
 
 		@Override
 		public void mouseClicked(MouseEvent e) {
-			if (hoveredTile.isFillable() && hoveredTile.getChild() == null && Game.money >= Turret.COST) {
+			if (hoveredTile != null && hoveredTile.isFillable() && hoveredTile.getChild() == null
+					&& Game.money >= Turret.COST) {
 				Game.money -= Turret.COST;
 
 				Turret turret = new Turret(hoveredTile.getX(), hoveredTile.getY());
 				hoveredTile.setChild(turret);
 				Game.addTurret(turret);
-				
-				if(selectedTurret != null) {
+
+				if (selectedTurret != null) {
 					selectedTurret.setSelected(false);
 				}
-				
+
 				selectedTurret = turret;
 				selectedTurret.setSelected(true);
 			}
 
 			if (hoveredTile.getChild() != null) {
-				selectedTurret.setSelected(false);
+				if(selectedTurret != null) {
+					selectedTurret.setSelected(false);
+				}
 				selectedTurret = (Turret) hoveredTile.getChild();
 				selectedTurret.setSelected(true);
-			} else {
+			} else if (selectedTurret != null) {
 				selectedTurret.setSelected(false);
 				selectedTurret = null;
 			}

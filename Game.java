@@ -22,8 +22,12 @@ public class Game {
 	private static ControlsPanel controlsPanel;
 	private static GamePanel gamePanel;
 
+	private static int enemyStartX;
+	private static int enemyStartY;
 	public static int round = 0;
 	public static int money = 100;
+	public static int ticksBetweenSpawns = 20;
+	private static int currentTick = 0;
 	public static Tile[][] map;
 
 	public static List<Turret> turrets = new ArrayList<Turret>();
@@ -56,10 +60,8 @@ public class Game {
 				}
 			}
 
-			int enemyStartX = sc.nextInt();
-			int enemyStartY = sc.nextInt();
-
-			enemies.add(new Enemy(enemyStartX * TILE_SIZE, enemyStartY * TILE_SIZE));
+			enemyStartX = sc.nextInt();
+			enemyStartY = sc.nextInt();
 
 			enemyPath.add(new Point(enemyStartX, enemyStartY));
 			buildEnemyPath(enemyStartX, enemyStartY);
@@ -110,6 +112,8 @@ public class Game {
 		cleanEnemies();
 		cleanBullets();
 		
+		spawnEnemies();
+		
 		for (Turret t : turrets) {
 			t.update();
 		}
@@ -119,6 +123,16 @@ public class Game {
 		for (Bullet b : bullets) {
 			b.update();
 		}
+	}
+	
+	public static void spawnEnemies() {
+		if(currentTick == ticksBetweenSpawns) {
+			currentTick = 0;
+			enemies.add(new Enemy(enemyStartX * TILE_SIZE, enemyStartY * TILE_SIZE));
+		} else {
+			currentTick++;
+		}
+		
 	}
 	
 	public static void cleanEnemies() {

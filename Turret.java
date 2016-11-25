@@ -5,14 +5,17 @@ import java.awt.Graphics2D;
 
 public class Turret extends Entity {
 	public static final int COST = 20;
+	public static final int DAMAGE_UPGRADE_INCREMENT = 10;
 
 	private int rotation;
 	private int armLength;
-	private int health;
 
 	private int ticksBetweenShots;
-	private int currentTick = 0;
-	private int bulletPower;
+	private int currentTick;
+	private int bulletDamage;
+
+	private int priceToUpgradeSpeed;
+	private int priceToUpgradeDamage;
 
 	private boolean selected = false;
 
@@ -22,9 +25,9 @@ public class Turret extends Entity {
 		color = Color.RED;
 		rotation = (int) (Game.random.nextDouble() * 360);
 		armLength = 12;
-		health = 100;
-		bulletPower = 10;
+		bulletDamage = 10;
 		ticksBetweenShots = 50;
+		priceToUpgradeSpeed = priceToUpgradeDamage = 20;
 	}
 
 	@Override
@@ -76,7 +79,7 @@ public class Turret extends Entity {
 
 			if (currentTick == ticksBetweenShots) {
 				Bullet bullet = new Bullet(x + Game.TILE_SIZE / 2, y + Game.TILE_SIZE / 2, xVelocity, yVelocity);
-				bullet.setDamage(bulletPower);
+				bullet.setDamage(bulletDamage);
 				Game.bullets.add(bullet);
 
 				currentTick = 0;
@@ -87,18 +90,35 @@ public class Turret extends Entity {
 		}
 	}
 
+	public void upgradeDamage() {
+		bulletDamage += DAMAGE_UPGRADE_INCREMENT;
+		priceToUpgradeDamage += 30;
+	}
+
+	public void upgradeSpeed() {
+
+	}
+
+	public int getPriceToUpgradeSpeed() {
+		return priceToUpgradeSpeed;
+	}
+
+	public int getPriceToUpgradeDamage() {
+		return priceToUpgradeDamage;
+	}
+
 	public int getDamage() {
-		return bulletPower;
+		return bulletDamage;
 	}
 	
-	public void setDamage(int bulletPower) {
-		this.bulletPower = bulletPower;
+	public int getSpeed() {
+		return ticksBetweenShots;
 	}
 
 	public boolean isSelected() {
 		return selected;
 	}
-	
+
 	public void setSelected(boolean selected) {
 		this.selected = selected;
 	}
