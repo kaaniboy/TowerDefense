@@ -59,6 +59,10 @@ public class Tile extends Entity {
 		return hovered;
 	}
 	
+	public void setFillable(boolean fillable) {
+		this.fillable = fillable;
+	}
+	
 	public boolean isFillable() {
 		return fillable;
 	}

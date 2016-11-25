@@ -6,6 +6,7 @@ import java.awt.Graphics2D;
 public class Turret extends Entity {
 	public static final int COST = 20;
 	public static final int DAMAGE_UPGRADE_INCREMENT = 10;
+	public static final int SPEED_UPGRADE_INCREMENT = 5;
 
 	private int rotation;
 	private int armLength;
@@ -112,7 +113,8 @@ public class Turret extends Entity {
 	}
 
 	public void upgradeSpeed() {
-
+		ticksBetweenShots -= SPEED_UPGRADE_INCREMENT;
+		priceToUpgradeSpeed += 30;
 	}
 
 	public int getPriceToUpgradeSpeed() {

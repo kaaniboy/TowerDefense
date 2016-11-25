@@ -42,8 +42,11 @@ public class ControlsPanel extends JPanel implements ActionListener {
 		increaseSpeedButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-
+				Turret selected = gamePanel.getSelectedTurret();
+				if (selected != null && Game.money >= selected.getPriceToUpgradeSpeed()) {
+					Game.money -= selected.getPriceToUpgradeSpeed();
+					selected.upgradeSpeed();
+				}
 			}
 		});
 

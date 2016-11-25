@@ -14,6 +14,7 @@ import javax.swing.Timer;
 public class Game {
 	public static final int FIELD_SIZE = 20;
 	public static final int TILE_SIZE = 600 / FIELD_SIZE;
+	public static final int MONEY_PER_KILL = 10;
 	public static final String MAP_FILE = "map.txt";
 	public static final Color BROWN = new Color(165, 126, 74);
 	public static final Color GREEN = new Color(0, 230, 0);
@@ -26,7 +27,7 @@ public class Game {
 	private static int enemyStartY;
 	public static int round = 0;
 	public static int money = 100;
-	public static int ticksBetweenSpawns = 60;
+	public static int ticksBetweenSpawns = 150;
 	private static int currentTick = 0;
 	public static Tile[][] map;
 
@@ -66,6 +67,12 @@ public class Game {
 
 			enemyPath.add(new Point(enemyStartX, enemyStartY));
 			buildEnemyPath(enemyStartX, enemyStartY);
+			Point basePoint = enemyPath.get(enemyPath.size() - 1);
+			basePoint.x += 1;
+			
+			map[basePoint.x][basePoint.y].setFillable(false);
+			
+			base = new Base(basePoint.x * TILE_SIZE, basePoint.y * TILE_SIZE);
 
 			sc.close();
 		} catch (FileNotFoundException e) {
@@ -124,6 +131,7 @@ public class Game {
 		for (Bullet b : bullets) {
 			b.update();
 		}
+		base.update();
 	}
 	
 	public static void spawnEnemies() {
@@ -140,6 +148,7 @@ public class Game {
 		Iterator<Enemy> iter = enemies.iterator();
 		while(iter.hasNext()) {
 			if(iter.next().isDead()) {
+				money += MONEY_PER_KILL;
 				iter.remove();
 			}
 		}

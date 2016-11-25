@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.awt.Graphics;
 
 public class Base extends Entity {
@@ -16,7 +17,8 @@ public class Base extends Entity {
 
 	@Override
 	public void paint(Graphics g) {
-		// TODO Auto-generated method stub
+		g.setColor(Color.MAGENTA);
+		g.fillOval(x, y, Game.TILE_SIZE, Game.TILE_SIZE);
 
 	}
 

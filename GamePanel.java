@@ -53,6 +53,8 @@ public class GamePanel extends JPanel implements ActionListener {
 		for (Bullet b : Game.bullets) {
 			b.paint(g2);
 		}
+		
+		Game.base.paint(g2);
 	}
 
 	public Turret getSelectedTurret() {
