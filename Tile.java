@@ -1,3 +1,12 @@
+// Assignment: Honors Contract
+// Arizona State University CSE205
+// Name: Kaan Aksoy
+// StudentID: 1210619069
+// Lecture: T, Th 4:30 PM - 5:45 PM, Dr. Nakamura
+// Description: Class that the individual tiles in the tower defense game's map.
+//              The tile may contain an entity of its own (a turret) given that
+//              it is fillable.
+
 import java.awt.Color;
 import java.awt.Graphics;
 

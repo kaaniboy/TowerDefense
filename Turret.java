@@ -1,3 +1,13 @@
+// Assignment: Honors Contract
+// Arizona State University CSE205
+// Name: Kaan Aksoy
+// StudentID: 1210619069
+// Lecture: T, Th 4:30 PM - 5:45 PM, Dr. Nakamura
+// Description: Class that represents the turrets that users can place on the map
+//              in the tower defense game. Turrets can have both their speed and
+//              damage upgraded using in-game money. They also shoot bullets at a
+//              specified rate.
+
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
@@ -81,7 +91,7 @@ public class Turret extends Entity {
 			if (currentTick == ticksBetweenShots) {
 				Bullet bullet = new Bullet(x + Game.TILE_SIZE / 2, y + Game.TILE_SIZE / 2, xVelocity, yVelocity);
 				bullet.setDamage(bulletDamage);
-				Game.bullets.add(bullet);
+				Game.getBullets().add(bullet);
 
 				currentTick = 0;
 			} else {
@@ -91,12 +101,12 @@ public class Turret extends Entity {
 	}
 	
 	private Enemy getClosestEnemy() {
-		if(Game.enemies.isEmpty())
+		if(Game.getEnemies().isEmpty())
 			return null;
 		
 		Enemy closest = null;
 		double closestDist = Double.MAX_VALUE;
-		for(Enemy e: Game.enemies) {
+		for(Enemy e: Game.getEnemies()) {
 			double dist = getDistanceTo(e);
 			if(dist < closestDist) {
 				closest = e;

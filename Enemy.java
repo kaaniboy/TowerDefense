@@ -1,3 +1,12 @@
+// Assignment: Honors Contract
+// Arizona State University CSE205
+// Name: Kaan Aksoy
+// StudentID: 1210619069
+// Lecture: T, Th 4:30 PM - 5:45 PM, Dr. Nakamura
+// Description: Class that represents an enemy in the tower defense game. Each
+//              enemy has its own health amount as well as a damage amount. The enemy
+//              will traverse its set path as the game progresses.
+
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
@@ -7,7 +16,7 @@ public class Enemy extends Entity {
 	private int damage;
 	private int maxHealth;
 	private int health;
-	int targetIndex;
+	private int targetIndex;
 
 	public Enemy(int x, int y) {
 		super(x, y);
@@ -39,9 +48,9 @@ public class Enemy extends Entity {
 
 	@Override
 	public void update() {
-		if (targetIndex < Game.enemyPath.size()) {
-			int targetX = Game.enemyPath.get(targetIndex).x * Game.TILE_SIZE;
-			int targetY = Game.enemyPath.get(targetIndex).y * Game.TILE_SIZE;
+		if (targetIndex < Game.getEnemyPath().size()) {
+			int targetX = Game.getEnemyPath().get(targetIndex).x * Game.TILE_SIZE;
+			int targetY = Game.getEnemyPath().get(targetIndex).y * Game.TILE_SIZE;
 
 			if (targetX != x) {
 				if (targetX > x) {

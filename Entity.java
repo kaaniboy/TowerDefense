@@ -1,3 +1,11 @@
+// Assignment: Honors Contract
+// Arizona State University CSE205
+// Name: Kaan Aksoy
+// StudentID: 1210619069
+// Lecture: T, Th 4:30 PM - 5:45 PM, Dr. Nakamura
+// Description: The parent class used to represent objects that can be painted and updated.
+//              Each entity also has a location and a color.
+
 import java.awt.Color;
 import java.awt.Graphics;
 

@@ -1,3 +1,12 @@
+// Assignment: Honors Contract
+// Arizona State University CSE205
+// Name: Kaan Aksoy
+// StudentID: 1210619069
+// Lecture: T, Th 4:30 PM - 5:45 PM, Dr. Nakamura
+// Description: Class that represents the base that must be defended in the tower
+//              defense game. The base has a specific health quantity.
+
+
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
