@@ -1,3 +1,4 @@
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Graphics;
@@ -6,6 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
+import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -26,8 +28,14 @@ public class ControlsPanel extends JPanel implements ActionListener {
 	public ControlsPanel() {
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		setPreferredSize(new Dimension(WIDTH, GUI.SCREEN_HEIGHT));
-		moneyLabel = new JLabel("Money: " + Game.money);
+		
+		add(Box.createRigidArea(new Dimension(0, 20)));
+		
+		moneyLabel = new JLabel("Money: $" + Game.money);
+		moneyLabel.setFont(moneyLabel.getFont().deriveFont(20.0F));
+		moneyLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 		add(moneyLabel);
+		add(Box.createRigidArea(new Dimension(0, 20)));
 
 		JPanel upgradesPanel = new JPanel();
 		upgradesPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
@@ -43,7 +51,7 @@ public class ControlsPanel extends JPanel implements ActionListener {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				Turret selected = gamePanel.getSelectedTurret();
-				if (selected != null && Game.money >= selected.getPriceToUpgradeSpeed()) {
+				if (selected != null && Game.money >= selected.getPriceToUpgradeSpeed() && selected.getSpeed() > 0) {
 					Game.money -= selected.getPriceToUpgradeSpeed();
 					selected.upgradeSpeed();
 				}
@@ -75,6 +83,7 @@ public class ControlsPanel extends JPanel implements ActionListener {
 		upgradesPanel.add(damageLabel);
 
 		add(upgradesPanel);
+		add(Box.createVerticalGlue());
 	}
 
 	public void setGamePanel(GamePanel gamePanel) {
@@ -88,7 +97,7 @@ public class ControlsPanel extends JPanel implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent event) {
-		moneyLabel.setText("Money: " + Game.money);
+		moneyLabel.setText("Money: $" + Game.money);
 
 		if (gamePanel.getSelectedTurret() != null) {
 			increaseSpeedButton.setEnabled(true);

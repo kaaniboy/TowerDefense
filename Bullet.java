@@ -12,7 +12,7 @@ public class Bullet extends Entity {
 	public Bullet(int x, int y, double xVelocity, double yVelocity) {
 		super(x, y);
 		damage = 10;
-		speedMultiplier = 10;
+		speedMultiplier = 15;
 		hasCollided = false;
 
 		this.xVelocity = speedMultiplier * xVelocity;
