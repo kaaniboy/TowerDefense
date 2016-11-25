@@ -3,7 +3,8 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 
-public class Enemy extends Entity {
+public class Enemy extends Entity {	
+	private int damage;
 	private int maxHealth;
 	private int health;
 	int targetIndex;
@@ -13,6 +14,7 @@ public class Enemy extends Entity {
 		color = Color.YELLOW;
 		targetIndex = 1;
 		health = maxHealth = 100;
+		damage = 5;
 	}
 
 	@Override
@@ -57,6 +59,10 @@ public class Enemy extends Entity {
 				targetIndex++;
 			}
 		}
+	}
+	
+	public int getDamage() {
+		return damage;
 	}
 
 	public int getHealth() {

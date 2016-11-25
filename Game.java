@@ -147,8 +147,12 @@ public class Game {
 	public static void cleanEnemies() {
 		Iterator<Enemy> iter = enemies.iterator();
 		while(iter.hasNext()) {
-			if(iter.next().isDead()) {
+			Enemy e = iter.next();
+			if(e.isDead()) {
 				money += MONEY_PER_KILL;
+				iter.remove();
+			} else if(base.getDistanceTo(e) < 5) {
+				base.setHealth(base.getHealth() - e.getDamage());
 				iter.remove();
 			}
 		}
