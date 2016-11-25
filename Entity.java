@@ -27,6 +27,10 @@ public abstract class Entity {
 		this.y = y;
 	}
 	
+	public double getDistanceTo(Entity e) {
+		return Math.sqrt(Math.pow(getX() - e.getX(), 2) + Math.pow(getY() - e.getY(), 2));
+	}
+	
 	public abstract void update();
 	public abstract void paint(Graphics g);
 }

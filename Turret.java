@@ -65,10 +65,10 @@ public class Turret extends Entity {
 
 	@Override
 	public void update() {
-		if (!Game.enemies.isEmpty()) {
-			Enemy firstEnemy = Game.enemies.get(0);
+		Enemy target = getClosestEnemy();
+		if (target != null) {
 			rotation = (int) Math
-					.toDegrees(Math.atan2(Game.toCartesianY(firstEnemy.y) - Game.toCartesianY(y), firstEnemy.x - x));
+					.toDegrees(Math.atan2(Game.toCartesianY(target.getY()) - Game.toCartesianY(y), target.getX() - x));
 
 			if (rotation < 0) {
 				rotation = 360 - Math.abs(rotation);
@@ -86,8 +86,24 @@ public class Turret extends Entity {
 			} else {
 				currentTick++;
 			}
-
 		}
+	}
+	
+	private Enemy getClosestEnemy() {
+		if(Game.enemies.isEmpty())
+			return null;
+		
+		Enemy closest = null;
+		double closestDist = Double.MAX_VALUE;
+		for(Enemy e: Game.enemies) {
+			double dist = getDistanceTo(e);
+			if(dist < closestDist) {
+				closest = e;
+				closestDist = dist;
+			}
+		}
+		
+		return closest;
 	}
 
 	public void upgradeDamage() {

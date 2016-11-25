@@ -26,7 +26,7 @@ public class Game {
 	private static int enemyStartY;
 	public static int round = 0;
 	public static int money = 100;
-	public static int ticksBetweenSpawns = 20;
+	public static int ticksBetweenSpawns = 60;
 	private static int currentTick = 0;
 	public static Tile[][] map;
 
@@ -34,6 +34,7 @@ public class Game {
 	public static List<Enemy> enemies = new ArrayList<Enemy>();
 	public static List<Bullet> bullets = new ArrayList<Bullet>();
 	public static List<Point> enemyPath = new ArrayList<Point>();
+	public static Base base;
 
 	public static void init() {// ControlsPanel cPanel, GamePanel gPanel) {
 		// controlsPanel = cPanel;
