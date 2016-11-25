@@ -11,7 +11,8 @@ import java.awt.Color;
 import java.awt.Graphics;
 
 public class Bullet extends Entity {
-
+	
+	//Instance fields for the bullets damage, velocity, and speed.
 	private int damage;
 	private double xVelocity;
 	private double yVelocity;
@@ -23,6 +24,8 @@ public class Bullet extends Entity {
 		damage = 10;
 		speedMultiplier = 15;
 		hasCollided = false;
+		
+		//Multiply the bullet's directional velocity by its speed multiplier.
 		this.xVelocity = speedMultiplier * xVelocity;
 		this.yVelocity = speedMultiplier * yVelocity;
 	}
@@ -34,7 +37,7 @@ public class Bullet extends Entity {
 		y += yVelocity;
 
 		//Check to see if the bullet has collided with an enemy.
-		//If the bullet has collided with an enemy, reduce the enemy's health.
+		//If so, reduce the enemy's health and mark the bullet as collided.
 		if (!hasCollided) {
 			for (Enemy e : Game.getEnemies()) {
 				if (Math.sqrt(Math.pow(y - e.getCenterY(), 2) + Math.pow(x - e.getCenterX(), 2)) < Game.TILE_SIZE - 4) {
@@ -55,6 +58,7 @@ public class Bullet extends Entity {
 		this.damage = damage;
 	}
 
+	//Draw the bullet.
 	@Override
 	public void paint(Graphics g) {
 		g.setColor(Color.BLACK);
