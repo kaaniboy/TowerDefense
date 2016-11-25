@@ -22,13 +22,15 @@ public class Game {
 
 	private static ControlsPanel controlsPanel;
 	private static GamePanel gamePanel;
-
+	
+	private static boolean isDone = false;
 	private static int enemyStartX;
 	private static int enemyStartY;
 	public static int round = 0;
 	public static int money = 100;
 	public static int ticksBetweenSpawns = 150;
 	private static int currentTick = 0;
+	private static int totalTicks = 0;
 	public static Tile[][] map;
 
 	public static List<Turret> turrets = new ArrayList<Turret>();
@@ -117,6 +119,8 @@ public class Game {
 	}
 
 	public static void update() {
+		updateGameStatus();
+		
 		cleanEnemies();
 		cleanBullets();
 		
@@ -134,6 +138,13 @@ public class Game {
 		base.update();
 	}
 	
+	public static void updateGameStatus() {
+		if(base.getHealth() <= 0) {
+			isDone = true;
+		} else {
+			totalTicks++;
+		}
+	}
 	public static void spawnEnemies() {
 		if(currentTick == ticksBetweenSpawns) {
 			currentTick = 0;
@@ -141,7 +152,6 @@ public class Game {
 		} else {
 			currentTick++;
 		}
-		
 	}
 	
 	public static void cleanEnemies() {
@@ -173,6 +183,14 @@ public class Game {
 
 	public static int toCartesianY(int y) {
 		return GUI.SCREEN_HEIGHT - y;
+	}
+	
+	public static boolean isDone() {
+		return isDone;
+	}
+	
+	public static int getTotalTicks() {
+		return totalTicks;
 	}
 
 	public static void addTurret(Turret t) {

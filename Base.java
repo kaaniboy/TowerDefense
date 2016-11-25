@@ -9,7 +9,7 @@ public class Base extends Entity {
 
 	public Base(int x, int y) {
 		super(x, y);
-		health = maxHealth = 50;
+		health = maxHealth = 5;
 	}
 
 	@Override
@@ -23,7 +23,7 @@ public class Base extends Entity {
 		Graphics2D g2 = (Graphics2D) g;
 
 		g2.setColor(Color.MAGENTA);
-		g2.fillOval(x, y, Game.TILE_SIZE, Game.TILE_SIZE);
+		g2.fillRect(x, y, Game.TILE_SIZE, Game.TILE_SIZE);
 
 		g2.setColor(Color.RED);
 		g2.fillRect(x - 4, y + Game.TILE_SIZE + 10, Game.TILE_SIZE + 8, 12);
