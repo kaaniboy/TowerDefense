@@ -102,14 +102,22 @@ public class Game {
 		}
 	}
 
+	//Automatically generate the enemy path given the the start point.
 	private static void buildEnemyPath(int startX, int startY) {
+		//Keep track of every point that has already been visited.
 		List<Point> visited = new ArrayList<Point>();
 		int currX = startX;
 		int currY = startY;
 		boolean done = false;
 
+		//Check all adjacent tiles (North, East, South, and West).
+		//If an adjacent tile has not been visited yet and is a part of the enemy path, move to that tile.
 		while (!done) {
+			//Add the current tile to the list of visited tiles.
 			visited.add(new Point(currX, currY));
+			
+			//Have to make sure that the adjacent tiles are within the bounds of the map.
+			
 			if (currY - 1 >= 0 && !visited.contains(new Point(currX, currY - 1))
 					&& !map[currX][currY - 1].isFillable()) {
 				currY = currY - 1;
