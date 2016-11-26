@@ -209,7 +209,6 @@ public class Game {
 			
 			if(totalTicks % 1000 == 0 && ticksBetweenSpawns >= 25) {
 				ticksBetweenSpawns -= 10;
-				System.out.println("Reduced time between spawns to: " + ticksBetweenSpawns);
 			}
 		}
 	}

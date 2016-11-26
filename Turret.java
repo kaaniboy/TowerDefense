@@ -15,8 +15,8 @@ import java.awt.Graphics2D;
 
 public class Turret extends Entity {
 	//Constants for the cost of buying turrets and how quickly turrets can be upgraded.
-	public static final int COST = 20;
-	public static final int DAMAGE_UPGRADE_INCREMENT = 10;
+	public static final int COST = 30;
+	public static final int DAMAGE_UPGRADE_INCREMENT = 5;
 	public static final int SPEED_UPGRADE_INCREMENT = 5;
 
 	//Instance fields used to draw the barrel of the turret.

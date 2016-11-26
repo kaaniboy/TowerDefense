@@ -4,7 +4,8 @@
 // StudentID: 1210619069
 // Lecture: T, Th 4:30 PM - 5:45 PM, Dr. Nakamura
 // Description: The parent class used to represent objects that can be painted and updated.
-//              Each entity also has a location and a color.
+//              Each entity also has a location and a color. It is abstract because it
+//              should not be instantiated on its own.
 
 import java.awt.Color;
 import java.awt.Graphics;
